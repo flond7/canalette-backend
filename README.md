@@ -1,3 +1,13 @@
+# SETUP
+
+## basic setup
+- pull from repository
+- change git repository: git remote set-url origin git@your.git.repo.example.com:user/repository2.git
+- chack repo change: git remote -v
+- run composer install
+
+
+
 # CodeIgniter 4 Application Starter
 
 ## What is CodeIgniter?
