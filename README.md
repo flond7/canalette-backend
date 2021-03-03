@@ -3,13 +3,20 @@
 ## setup files
 - pull from repository
 - change dir (folder) name
-- in .env file change app.baseURL to the app name
 - create the new repo on github
 - change git repository: git remote set-url origin git@your.git.repo.example.com:user/repository2.git
 - chack repo change: git remote -v
+
+## check installation
 - run composer install
 
 ## setup server
+- check folder permissions
+  sudo chown -R <user>:<group> folder-to-own
+
+- allow permission to write writeble folder to apache2
+  chown -R www-data:www-data /var/www/html/NAME-OF-YOUR-APP/writable 
+
 - check if mod_rewrite is enabled (or enable it)
   sudo a2enmod rewrite
 
@@ -23,7 +30,7 @@
       Require all granted
   </Directory>
 
-- create virtual host on apache2 creating a config file (copy the base config) in /etc/apache2/sites-available/name-of-your-app.conf 
+- create virtual host on apache2 creating a config file (copy the base config) in /etc/apache2/sites-available/NAME-OF-YOUR-APP.conf 
   <VirtualHost 172.20.34/name-of-your-app>
         # The ServerName directive sets the request scheme, hostname and port t$
         # the server uses to identify itself. This is used when creating
@@ -35,7 +42,7 @@
         ServerName name-of-your-app
 
         ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/html/name-of-your-app/public
+        DocumentRoot /var/www/html/NAME-OF-YOUR-APP/public
 
         # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
         # error, crit, alert, emerg.
@@ -54,10 +61,35 @@
         #Include conf-available/serve-cgi-bin.conf
   </VirtualHost>
 
+- restart
+  sudo systemctl restart apache2
 
+## rewrite rules
+- in .htaccess change the rewrite rule with the correct name
+  RewriteBase /NAME-OF-YOUR-APP/
+
+- in app/Config/app.php change the baseURL
+  public $baseURL = 'http://localhost/NAME-OF-YOUR-APP';
+  
 
 ## database setup
-- in .env
+- in .env change the app.baseURL
+  http://SERVER.IP/NAME-OF-YOUR-APP'
+
+- update database info
+
+
+
+
+# CRUD API
+## model
+- in app/Model add specific model
+
+## controller
+
+
+## route
+- in app/config/routes.php add
 
 
 

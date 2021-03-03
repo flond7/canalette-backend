@@ -22,13 +22,6 @@ class TariffeController extends Controller
  
   }
 
-
-/*   public function index() {
-    $data['something'] = 'whatever is appropriate';
-    $this->output->set_content_type('application/json')->set_output(json_encode($data,JSON_PRETTY_PRINT));
- } 
- */
-
   public function view($slug = null) {
     $model = new TariffeModel();
     $data['tariffe'] = $model->getTariffe($slug);
@@ -82,15 +75,9 @@ class TariffeController extends Controller
             'slug'  => url_title($this->request->getPost('title'), '-', TRUE),
             'body'  => $this->request->getPost('body'),
         ]);
-
         echo view('news/success');
-
-    }
-    else
-    {
-        echo view('templates/header', ['title' => 'Create a news item']);
-        echo view('news/create');
-        echo view('templates/footer');
+    } else {
+      echo view('api/TariffeView', $data);
     }
   }
 

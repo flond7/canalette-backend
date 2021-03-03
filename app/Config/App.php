@@ -23,7 +23,7 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $baseURL = 'http://localhost/codeigniter-starter';
+	public $baseURL = 'http://localhost/canalette-backend';
 
 	/**
 	 * --------------------------------------------------------------------------
