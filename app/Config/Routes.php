@@ -36,15 +36,6 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 //$routes->get('(:any)', 'Pages::view/$1');
 
-//TAX
-$routes->get('tax/', 'TaxController::index');
-$routes->get('tax/create', 'TaxController::create');
-$routes->post('tax/store', 'TaxController::store');
-$routes->get('tax/edit/(:num)', 'TaxController::edit/$1');
-$routes->post('tax/update/(:num)', 'TaxController::update/$1');
-$routes->get('tax/delete/(:num)', 'TaxController::delete/$1');
-
-
 
 /*
  * --------------------------------------------------------------------
