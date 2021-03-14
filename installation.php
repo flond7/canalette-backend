@@ -68,7 +68,7 @@ if (mysqli_query($link, $tabThree)) {
 $tabFour = "CREATE TABLE IF NOT EXISTS relational (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   amount DOUBLE(40,2) NOT NULL,
-  paid BOOLEAN NOT NULL,
+  paid TINYINT NOT NULL,
   id_user INT NOT NULL,
   id_drain INT NOT NULL,
   id_year INT NOT NULL
