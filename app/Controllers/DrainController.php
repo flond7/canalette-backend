@@ -17,18 +17,18 @@ class DrainController extends Controller {
  }
 
  $filter {
-   "name_field": "id_user",
+   "name_field": "id_drain",
    "value_field": xxxxxxxxx
  }
 */
 
   use ResponseTrait;
 
-  // show list
+  // show list  ----------------------------------------------------- OK ON POSTMAN
   // SERVER IP/canalette-backend/drain/list
   public function index() {
     $model = new DrainModel();
-    $data['items'] = $model->orderBy('num', 'DESC')->findAll();
+    $data = $model->orderBy('num', 'DESC')->findAll();
     return $this->respond($data);
   }
 
@@ -47,7 +47,6 @@ class DrainController extends Controller {
   // add item
   // SERVER IP/canalette-backend/drain/create
   public function create() {
-    //$data = var_dump($this->request->getJSON()); //gets object(stdClass
     $model = new DrainModel();
     $data = $this->request->getJSON();
     //$dataT = var_dump($this->request->getJSON());
@@ -107,7 +106,7 @@ class DrainController extends Controller {
   } 
 
    // update item
-  // SERVER IP/canalette-backend/user/join
+  // SERVER IP/canalette-backend/drain/joined
   public function joined($filter){
     $model = new DrainModel();
     $data = $model->joined($filter);
