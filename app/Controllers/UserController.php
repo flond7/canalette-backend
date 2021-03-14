@@ -86,8 +86,7 @@ class UserController extends Controller
 
   // update item
   // SERVER IP/canalette-backend/taxController/update/$year/$taxCitizen/$taxBusiness
-  public function update($input)
-  {
+  public function update($input) {
     var_dump($input);
     $model = new UserModel();
     $id = intval($input["id_user"]);
@@ -116,8 +115,7 @@ class UserController extends Controller
 
   // update item
   // SERVER IP/canalette-backend/user/join
-  public function joined($filter)
-  {
+  public function joined($filter) {
     $model = new UserModel();
     $data = $model->joined($filter);
     return $this->respond($data);

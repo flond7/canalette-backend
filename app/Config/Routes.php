@@ -44,6 +44,7 @@ $routes->get('drain/view/(:any)','DrainController::showItem/$1');
 $routes->post('drain/create','DrainController::create');
 $routes->put('drain/edit/(:num)','DrainController::update/$1');
 $routes->delete('drain/delete/(:num)', 'DrainController::delete/$1');
+$routes->get('drain/joined/(:any)', 'DrainController::joined/$1');
 
 // USERS
 //$routes->options('(:any)', 'UserController::options'); //one options method for all routes
@@ -52,7 +53,7 @@ $routes->get('user/view/(:any)','UserController::showItem/$1');
 $routes->post('user/create','UserController::create');
 $routes->put('user/edit/(:num)','UserController::update/$1');
 $routes->delete('user/delete/(:num)', 'UserController::delete/$1');
-//$routes->get('user/join', 'UserController::joined');
+$routes->get('user/joined/(:any)', 'UserController::joined/$1');
 
 /*
  * --------------------------------------------------------------------

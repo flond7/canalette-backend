@@ -10,19 +10,19 @@ class UserModel extends Model
   protected $returnType = 'array';
   protected $allowedFields = ['id_user', 'first_name', 'last_name', 'cf', 'email', 'tel', 'category'];
 
-  public function joined($filter){
-    $builder = $this->db->table("relational");
-    $builder->select('*');
-    //$builder->select('title, content, date');  //JUST SOME COLS
-    $builder->join('users', 'users.id_user = relational.id_user', 'right outer');
-    $builder->join('taxes', 'taxes.id_year = relational.id_year', 'right outer');
-    $builder->join('drainChannels', 'drainChannels.id_drain = relational.id_drain', 'right outer');
-    //$data = $builder->get()->getResult();
-    $data = $builder->getWhere(['cf' => $filter])->getResult();
+  public function joined($filter) {
+    $data = $this->db->table('relational')
+                     ->select('*')
+                     ->join('users', 'users.id_user = relational.id_user', 'right outer')
+                     ->join('taxes', 'taxes.id_year = relational.id_year', 'right outer')
+                     ->join('drainChannels', 'drainChannels.id_drain = relational.id_drain', 'right outer')
+                     ->where('cf', $filter)
+                     ->get()->getResult();
     return $data;
   }
-  /* NOTHING ELSE MATTERS */
+}
 
+  /* NOTHING ELSE MATTERS */
   /*
     protected $table = '';
     protected $primaryKey = '';
@@ -43,5 +43,3 @@ class UserModel extends Model
     protected $skipValidation     = false;
 
     */
-
-}
