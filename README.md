@@ -87,6 +87,8 @@
   table, primaryKey, allowedFields
 
 ## controller
+- if file is copied remember to change the model in all methods
+
 - index()
   change the ordered by
 
@@ -102,6 +104,10 @@
 ## route
 - no required changes if you use the url
   http://localhost/NAME-OF-YOUR-APP/controllerName/controllerMethod/var
+
+- for better routing add in app/config/routes.php
+  $routes->get('category/method/(:num)','controllerName::methodName/$1'); 
+  (first part is just an indication for the url, you can choose what you want)
 
 
 
