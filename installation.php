@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "";
-$password = "";
+$username = "dbroot";
+$password = "dbmuni05cipio";
 $dbName = "canalette";
 
 /* Attempt MySQL server connection. Assuming you are running MySQL
@@ -25,12 +25,12 @@ mysqli_select_db($link, $dbName);
 // USER table
 $tabOne = "CREATE TABLE IF NOT EXISTS users (
   id_user INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  first_name VARCHAR(30) NOT NULL,
-  last_name VARCHAR(30) NOT NULL,
-  cf VARCHAR(16) NOT NULL,
+  first_name VARCHAR(30),
+  last_name VARCHAR(30),
+  cf VARCHAR(16),
   email VARCHAR(70),
   tel VARCHAR(30),
-  category VARCHAR(30) NOT NULL
+  category VARCHAR(30)
   )";
 if (mysqli_query($link, $tabOne)) {
   echo "Table USERS created successfully. ";
@@ -54,8 +54,8 @@ if (mysqli_query($link, $tabTwo)) {
 $tabThree = "CREATE TABLE IF NOT EXISTS drainChannels (
   id_drain INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   num VARCHAR(30) NOT NULL,
-  street VARCHAR(70),
-  fogl VARCHAR(30),
+  street VARCHAR(70) NOT NULL,
+  fogl VARCHAR(30) NOT NULL,
   map VARCHAR(30) NOT NULL
   )";
 if (mysqli_query($link, $tabThree)) {
@@ -81,9 +81,11 @@ if (mysqli_query($link, $tabFour)) {
 
 // Add test initial data 
 $insertOne = "INSERT INTO users (id_user, first_name, last_name, cf, email, tel, category) VALUES
-  (0, 'Elisa', 'Pessa', 'PSSLSE1234567890', 'elisa@mail.it', '0123456789', 'citizen'),
-  (1, 'Eli', 'Pes', 'PSSLS4567890', 'elisa@mail.it', '0123456789', 'citizen'),
-  (2, 'E', 'Pessa', 'PSSLSE1234567890', 'elisa@mail.it', '0123456789', 'citizen')";
+  (1, 'Elisa', 'Pessa', 'PSSLSE1234567890', 'elisa@mail.it', '0123456789', 'citizen'),
+  (2, 'Alessandra', 'Pessa', 'AL35G5t698S', 'elisa@mail.it', '0123456789', 'citizen'),
+  (3, 'Luca', 'Pessa', 'LCGF93FG871K', 'elisa@mail.it', '0123456789', 'citizen'),
+  (4, 'Francesca', 'Pessa', 'FCGTLT86F45Gt998', 'elisa@mail.it', '0123456789', 'business'),
+  (5, 'Pier', 'Pessa', 'PRG67F98KOL457U', 'elisa@mail.it', '0123456789', 'business')";
 if (mysqli_query($link, $insertOne)) {
   echo "USER data inserted successfully. ";
 } else {
@@ -103,9 +105,11 @@ if (mysqli_query($link, $insertTwo)) {
 
 // Add test initial data 
 $insertThree = "INSERT INTO drainChannels (id_drain, num, street, fogl, map) VALUES
-  (0, '143', 'Via Roma 1', '12', '5'),
-  (1, '1', 'Via Roma 1', '67', '77'),
-  (2, '273', 'Via Roma 1', '2', '53')";
+  (1, '1', 'Via Roma 1', '12', '5'),
+  (2, '112', 'Via Milano 1', '67', '77'),
+  (3, '273', 'Via Udine 1', '2', '53'),
+  (4, '439', 'Via Genova 1', '5', '81'),
+  (5, '576', 'Via Bari 1', '27', '153')";
 if (mysqli_query($link, $insertThree)) {
   echo "Table inserted data successfully.";
 } else {
@@ -115,10 +119,15 @@ if (mysqli_query($link, $insertThree)) {
 
  // Add test initial data 
 $insertThree = "INSERT INTO relational (id, amount, paid, id_user, id_drain, id_year) VALUES
-(0, 1050, true, 1, 1, 1994),
-(1, 950, true, 1, 1, 1995),
-(2, 1050, true, 2, 2, 1994),
-(3, 1050, true, 0, 2, 1995)";
+(1, 1050, true, 1, 1, 1994),
+(2, 950, true, 1, 1, 1995),
+(3, 1050, true, 2, 2, 1994),
+(4, 1050, true, 2, 3, 1994),
+(5, 1050, true, 2, 4, 1994),
+(6, 1050, true, 3, 2, 1995),
+(7, 1050, false, 4, 2, 2020),
+(8, 1050, true, 4, 4, 1994),
+(9, 1050, true, 5, 5, 1995)";
 if (mysqli_query($link, $insertThree)) {
 echo "Table inserted data successfully.";
 } else {
