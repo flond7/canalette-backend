@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\DrainModel;
 use CodeIgniter\Controller;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\HTTP\Response;
 
 class DrainController extends Controller {
 
@@ -24,8 +25,7 @@ class DrainController extends Controller {
 
   use ResponseTrait;
 
-  // show list  ----------------------------------------------------- OK ON POSTMAN
-  // SERVER IP/canalette-backend/drain/list
+  // SERVER IP/canalette-backend/drain/list ***************** SHOW LIST ---------- OK ON POSTMAN
   public function index() {
     $model = new DrainModel();
     $data = $model->orderBy('num', 'DESC')->findAll();
@@ -44,13 +44,16 @@ class DrainController extends Controller {
     }
   }
 
-  // add item
-  // SERVER IP/canalette-backend/drain/create
+  // SERVER IP/canalette-backend/drain/create *************** ADD DRAIN ---------- OK ON POSTMAN
   public function create() {
     $model = new DrainModel();
-    $data = $this->request->getJSON();
-    //$dataT = var_dump($this->request->getJSON());
-    $model->insert($data);
+    $input = json_decode($this->request->getBody(), true);  //convert to associative array
+    $saved = $model->save([
+      'num' => $input['num'],
+      'street' => $input['street'],
+      'fogl' => $input['fogl'],
+      'map'  => $input['map']
+    ]);
     $response = [
       'status'   => 201,
       'error'    => null,
@@ -112,4 +115,12 @@ class DrainController extends Controller {
     $data = $model->joined($filter);
     return $this->respond($data);
   }
+
+  /* public function options(): Response {
+    return $this->response->setHeader('Access-Control-Allow-Origin', '*') //for allow any domain, insecure
+      ->setHeader('Access-Control-Allow-Headers', '*') //for allow any headers, insecure
+      ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE') //method allowed
+      ->setHeader('Content-type', 'text/html')
+      ->setStatusCode(200); //status code
+} */
 }
