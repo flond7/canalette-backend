@@ -5,6 +5,12 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use CodeIgniter\Controller;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\HTTP\Response;
+
+/* FOR VALIDATION
+https://www.studentstutorial.com/codeigniter/codeigniter-crud
+ */
+
 
 class UserController extends Controller
 {
@@ -27,16 +33,14 @@ class UserController extends Controller
 
   use ResponseTrait;
 
-  // show list
-  // SERVER IP/canalette-backend/user/list
+  // SERVER IP/canalette-backend/user/list ****************** SHOW LIST
   public function index() {
     $model = new UserModel();
     $data['items'] = $model->orderBy('surname', 'DESC')->findAll();
     return $this->respond($data);
   }
 
-  // show single item based on cf
-  // SERVER IP/canalette-backend/user/view/(:num)
+  // SERVER IP/canalette-backend/user/view/(:num) *********** SHOW SINGLE ITEM BASED ON CF
   public function showItem($cf = null){ 
     $model = new UserModel();
     $data = $model->getWhere(['cf' => $cf])->getResult();
@@ -47,15 +51,20 @@ class UserController extends Controller
     }
   }
 
-  // add item
-  // SERVER IP/canalette-backend/user/create
-  public function create()
-  {
-    //$data = var_dump($this->request->getJSON()); //gets object(stdClass
+  // SERVER IP/canalette-backend/user/create *************** ADD USER
+  public function create() {
     $model = new UserModel();
-    $data = $this->request->getJSON();
-    //$dataT = var_dump($this->request->getJSON());
-    $model->insert($data);
+    //convert request body to associative array
+    $input = json_decode($this->request->getBody(), true);
+    //$data = gettype($input);
+    $saved = $model->save([
+      'first_name' => $input['first_name'],
+      'last_name' => $input['last_name'],
+      'cf' => $input['cf'],
+      'email'  => $input['email'],
+      'tel' => $input['tel'],
+      'category' => $input['category']
+    ]);
     $response = [
       'status'   => 201,
       'error'    => null,
@@ -63,6 +72,14 @@ class UserController extends Controller
     ];
     return $this->respondCreated($response);
   }
+
+  public function options(): Response {
+      return $this->response->setHeader('Access-Control-Allow-Origin', '*') //for allow any domain, insecure
+          ->setHeader('Access-Control-Allow-Headers', '*') //for allow any headers, insecure
+          ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE') //method allowed
+          ->setStatusCode(200); //status code
+  }
+
 
   // delete item
   // SERVER IP/canalette-backend/user/delete/(:num)
