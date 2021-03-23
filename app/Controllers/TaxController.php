@@ -5,34 +5,51 @@ namespace App\Controllers;
 use App\Models\TaxModel;
 use CodeIgniter\Controller;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\HTTP\Response;
 
 class TaxController extends Controller {
 
   use ResponseTrait;
 
-  // show list
-  // SERVER IP/canalette-backend/taxController/
+  // SERVER IP/canalette-backend/tax/list ****************** SHOW LIST
   public function index() {
     $model = new TaxModel();
-    $data['items'] = $model->orderBy('year', 'DESC')->findAll();
+    $data = $model->orderBy('id_year', 'DESC')->findAll();
     return $this->respond($data);
   }
 
-  // show single item
-  // SERVER IP/canalette-backend/taxController/showItem/$id
-  public function showItem($id = null) {
+  // SERVER IP/canalette-backend/tax/view/(:num) *********** SHOW SINGLE ITEM BASED ON YEAR
+  public function showItem($year = null){ 
     $model = new TaxModel();
-    $data = $model->getWhere(['year' => $id])->getResult();
+    $data = $model->getWhere(['id_year' => $year])->getResult();
     if ($data) {
       return $this->respond($data);
     } else {
-      return $this->failNotFound('No Data Found with id '.$id);
+      return $this->failNotFound('No Data Found with id ' . $year);
     }
   }
 
+  // SERVER IP/canalette-backend/user/create *************** ADD USER
+  public function create() {
+    $model = new TaxModel();
+    $input = json_decode($this->request->getBody(), true);
+    $saved = $model->save([
+      'id_year' => $input['id_year'],
+      'taxBusiness' => $input['taxBusiness'],
+      'taxCitizen' => $input['taxCitizen']
+    ]);
+    $response = [
+      'status'   => 201,
+      'error'    => null,
+      'messages' => ['success' => 'Data Saved']
+    ];
+    return $this->respondCreated($response);
+  }
+
+
   // add item
   // SERVER IP/canalette-backend/taxController/store/$year/$taxCitizen/$taxBusiness
-  public function store($year, $taxCitizen, $taxBusiness) {
+  /* public function store($year, $taxCitizen, $taxBusiness) {
     $model = new TaxModel();
     $data = [
       'year' => $year,
@@ -46,7 +63,7 @@ class TaxController extends Controller {
       'messages' => ['success' => 'Data Saved']
     ];
     return $this->respondCreated($response);
-  }
+  } */
 
   // delete item
   // 172.20.34.75/canalette-backend/taxController/delete/(:num)

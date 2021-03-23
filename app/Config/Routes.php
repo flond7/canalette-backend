@@ -46,14 +46,23 @@ $routes->put('drain/edit/(:num)','DrainController::update/$1');
 $routes->delete('drain/delete/(:num)', 'DrainController::delete/$1');
 $routes->get('drain/joined/(:any)', 'DrainController::joined/$1');
 
+// DRAINCHANNELS
+//$routes->get('tax/list','TaxController::index');
+//$routes->get('tax/view/(:any)','TaxController::showItem/$1');
+$routes->post('tax/create','TaxController::create');
+//$routes->put('tax/edit/(:num)','TaxController::update/$1');
+//$routes->delete('tax/delete/(:num)', 'TaxController::delete/$1');
+//$routes->get('tax/joined/(:any)', 'TaxController::joined/$1');
+
 // USERS
-//$routes->options('(:any)', 'UserController::options'); //one options method for all routes
 $routes->get('user/list','UserController::index');
 $routes->get('user/view/(:any)','UserController::showItem/$1');
 $routes->post('user/create','UserController::create');
 $routes->put('user/edit/(:num)','UserController::update/$1');
 $routes->delete('user/delete/(:num)', 'UserController::delete/$1');
 $routes->get('user/joined/(:any)', 'UserController::joined/$1');
+
+$routes->options('(:any)', 'UserController::options'); //one options method for all routes.
 
 /*
  * --------------------------------------------------------------------

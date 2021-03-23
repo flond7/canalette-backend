@@ -6,9 +6,9 @@ use CodeIgniter\Model;
 class TaxModel extends Model
 {
   protected $table = 'taxes';
-  protected $primaryKey = 'year';
+  protected $primaryKey = 'id_year';
   protected $returnType = 'array';
-  protected $allowedFields = ['year', 'taxCitizen', 'taxBusiness'];
+  protected $allowedFields = ['id_year', 'taxCitizen', 'taxBusiness'];
 
   /* NOTHING ELSE HERE */
 
