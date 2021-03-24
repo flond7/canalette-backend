@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Controllers;
-
 use App\Models\UserModel;
 use CodeIgniter\Controller;
 use CodeIgniter\API\ResponseTrait;
@@ -11,25 +9,7 @@ use CodeIgniter\HTTP\Response;
 https://www.studentstutorial.com/codeigniter/codeigniter-crud
  */
 
-
-class UserController extends Controller
-{
-
-  /* $data = {
-    ********************************* "id_user": 1,
-    "first_name": "Elisa", 
-    "last_name": "Pessa",
-    "cf": "1234567891234567",
-    "email": "elisa@gmail.com",
-    "tel": "12345678",
-    "category": "business"
- }
-
- $filter {
-   "name_field": "id_user",
-   "value_field": xxxxxxxxx
- }
-*/
+class UserController extends Controller {
 
   use ResponseTrait;
 
@@ -51,7 +31,7 @@ class UserController extends Controller
     }
   }
 
-  // SERVER IP/canalette-backend/user/create *************** ADD USER
+  // SERVER IP/canalette-backend/user/create *************** ADD USER -------------------------------------- POSTMAN OK
   public function create() {
     $model = new UserModel();
     //convert request body to associative array
@@ -73,18 +53,8 @@ class UserController extends Controller
     return $this->respondCreated($response);
   }
 
-  public function options(): Response {
-      return $this->response->setHeader('Access-Control-Allow-Origin', '*') //for allow any domain, insecure
-          ->setHeader('Access-Control-Allow-Headers', '*') //for allow any headers, insecure
-          ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE') //method allowed
-          ->setStatusCode(200); //status code
-  }
-
-
-  // delete item
-  // SERVER IP/canalette-backend/user/delete/(:num)
-  public function delete($id = null)
-  {
+  // SERVER IP/canalette-backend/user/delete/(:num) ******** DELETE USER ----------------------------------- POSTMAN OK
+  public function delete($id = null) {
     $model = new UserModel();
     $data = $model->find($id);
     //$dataT = var_dump($data);
@@ -136,5 +106,12 @@ class UserController extends Controller
     $model = new UserModel();
     $data = $model->joined($filter);
     return $this->respond($data);
+  }
+
+  public function options(): Response {
+    return $this->response->setHeader('Access-Control-Allow-Origin', '*') //for allow any domain, insecure
+        ->setHeader('Access-Control-Allow-Headers', '*') //for allow any headers, insecure
+        ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE') //method allowed
+        ->setStatusCode(200); //status code
   }
 }

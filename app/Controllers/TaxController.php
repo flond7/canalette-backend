@@ -11,14 +11,14 @@ class TaxController extends Controller {
 
   use ResponseTrait;
 
-  // SERVER IP/canalette-backend/tax/list ****************** SHOW LIST
+  // SERVER IP/canalette-backend/tax/list ****************** SHOW LIST ------------------------------ POSTMAN OK
   public function index() {
     $model = new TaxModel();
     $data = $model->orderBy('id_year', 'DESC')->findAll();
     return $this->respond($data);
   }
 
-  // SERVER IP/canalette-backend/tax/view/(:num) *********** SHOW SINGLE ITEM BASED ON YEAR
+  // SERVER IP/canalette-backend/tax/view/(:num) *********** SHOW SINGLE ITEM BASED ON YEAR --------- POSTMAN OK
   public function showItem($year = null){ 
     $model = new TaxModel();
     $data = $model->getWhere(['id_year' => $year])->getResult();
@@ -29,21 +29,22 @@ class TaxController extends Controller {
     }
   }
 
-  // SERVER IP/canalette-backend/user/create *************** ADD USER
+  // SERVER IP/canalette-backend/user/create *************** ADD USER ------------------------------- POSTMAN OK
   public function create() {
     $model = new TaxModel();
     $input = json_decode($this->request->getBody(), true);
-    $saved = $model->save([
+    $saved = $model->insert([
       'id_year' => $input['id_year'],
       'taxBusiness' => $input['taxBusiness'],
       'taxCitizen' => $input['taxCitizen']
     ]);
+    //$data = gettype($input['taxBusiness']);
     $response = [
       'status'   => 201,
       'error'    => null,
       'messages' => ['success' => 'Data Saved']
     ];
-    return $this->respondCreated($response);
+    return $this->respondCreated($saved);
   }
 
 
@@ -65,8 +66,7 @@ class TaxController extends Controller {
     return $this->respondCreated($response);
   } */
 
-  // delete item
-  // 172.20.34.75/canalette-backend/taxController/delete/(:num)
+  // SERVER IP/canalette-backend/tax/delete/(:num) ******** DELETE YEAR ----------------------------- POSTMAN OK
   public function delete($id = null) {
     $model = new TaxModel();
     $data = $model->find($id);

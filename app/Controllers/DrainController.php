@@ -62,12 +62,10 @@ class DrainController extends Controller {
     return $this->respondCreated($response);
   }
 
-  // delete item
-  // SERVER IP/canalette-backend/drain/delete/(:num)
+  // SERVER IP/canalette-backend/drain/delete/(:num) ******* DELETE DRAIN -------- OK ON POSTMAN
   public function delete($id = null) {
     $model = new DrainModel();
     $data = $model->find($id);
-    //$dataT = var_dump($data);
     if ($data) {
       $model->delete($id);
       $response = array(

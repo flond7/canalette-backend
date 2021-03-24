@@ -47,11 +47,11 @@ $routes->delete('drain/delete/(:num)', 'DrainController::delete/$1');
 $routes->get('drain/joined/(:any)', 'DrainController::joined/$1');
 
 // DRAINCHANNELS
-//$routes->get('tax/list','TaxController::index');
-//$routes->get('tax/view/(:any)','TaxController::showItem/$1');
+$routes->get('tax/list','TaxController::index');
+$routes->get('tax/view/(:any)','TaxController::showItem/$1');
 $routes->post('tax/create','TaxController::create');
 //$routes->put('tax/edit/(:num)','TaxController::update/$1');
-//$routes->delete('tax/delete/(:num)', 'TaxController::delete/$1');
+$routes->delete('tax/delete/(:num)', 'TaxController::delete/$1');
 //$routes->get('tax/joined/(:any)', 'TaxController::joined/$1');
 
 // USERS
