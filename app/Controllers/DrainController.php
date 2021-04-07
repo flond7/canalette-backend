@@ -34,13 +34,13 @@ class DrainController extends Controller {
 
   // show single item
   // SERVER IP/canalette-backend/drain/view/(:num)
-  public function showItem($id = null) {
+  public function showItem($num = null) {
     $model = new DrainModel();
-    $data = $model->getWhere(['id_drain' => $id])->getResult();
+    $data = $model->getWhere(['num' => $num])->getResult();
     if ($data) {
       return $this->respond($data);
     } else {
-      return $this->failNotFound('No Data Found with id '.$id);
+      return $this->failNotFound('No Data Found with num '.$num);
     }
   }
 
