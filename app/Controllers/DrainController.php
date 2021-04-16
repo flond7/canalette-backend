@@ -9,23 +9,9 @@ use CodeIgniter\HTTP\Response;
 
 class DrainController extends Controller {
 
-/* $data = {
-    ********************************* "id_drain": 1,
-    "num": "402", 
-    "street": "Via Roma 1",
-    "fogl": "12",
-    "map": "72@gmail.com"
- }
-
- $filter {
-   "name_field": "id_drain",
-   "value_field": xxxxxxxxx
- }
-*/
-
   use ResponseTrait;
 
-  // SERVER IP/canalette-backend/drain/list ***************** SHOW LIST ---------- OK ON POSTMAN
+    // SERVER IP/canalette-backend/drain/list ***************** SHOW LIST ---------- OK ON POSTMAN
   public function index() {
     $model = new DrainModel();
     $data = $model->orderBy('num', 'DESC')->findAll();
@@ -46,20 +32,34 @@ class DrainController extends Controller {
 
   // SERVER IP/canalette-backend/drain/create *************** ADD DRAIN ---------- OK ON POSTMAN
   public function create() {
+    //helper(['form', 'url']);
     $model = new DrainModel();
     $input = json_decode($this->request->getBody(), true);  //convert to associative array
-    $saved = $model->save([
-      'num' => $input['num'],
-      'street' => $input['street'],
-      'fogl' => $input['fogl'],
-      'map'  => $input['map']
-    ]);
-    $response = [
-      'status'   => 201,
-      'error'    => null,
-      'messages' => ['success' => 'Data Saved']
-    ];
-    return $this->respondCreated($response);
+    
+    $validation = \Config\Services::validation();
+    $val = $validation->run($input, 'validationDrainRules');     
+    
+    if (!$val) {
+      $responseErr = [
+        'status'   => 400,
+        'error'    => "error",
+        'messages' => ['error' => 'La canaletta esiste già']
+      ];
+      return $this->respondCreated($responseErr);  
+    } else {
+      $saved = $model->insert([
+        'num' => $input['num'],
+        'street' => $input['street'],
+        'fogl' => $input['fogl'],
+        'map'  => $input['map']
+      ]);
+      $response = [
+        'status'   => 201,
+        'error'    => null,
+        'messages' => ['success' => 'Data Saved']
+      ];
+      return $this->respondCreated($response);
+    } 
   }
 
   // SERVER IP/canalette-backend/drain/delete/(:num) ******* DELETE DRAIN -------- OK ON POSTMAN

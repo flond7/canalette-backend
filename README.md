@@ -109,6 +109,13 @@
   $routes->get('category/method/(:num)','controllerName::methodName/$1'); 
   (first part is just an indication for the url, you can choose what you want)
 
+## validation
+- Validation rules have to be added as array in App/Config/Validation.php  
+  public validationComponentRules = ['name' => 'required']  
+- In the controller add link to validation and run the right config  
+  $validation = \Config\Services::validation();  
+  $val = $validation->run($input, 'validationComponentRules');  
+
 
 
 # CodeIgniter 4 Application Starter

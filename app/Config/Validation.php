@@ -40,4 +40,12 @@ class Validation
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
+
+	public $validationDrainRules = [
+    'num' => 'required|is_unique',
+    'street' => 'required',
+    'fogl' => 'required',
+    'map' => 'required'
+  ];
+
 }
