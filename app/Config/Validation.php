@@ -42,10 +42,21 @@ class Validation
 	//--------------------------------------------------------------------
 
 	public $validationDrainRules = [
-    'num' => 'required|is_unique',
-    'street' => 'required',
-    'fogl' => 'required',
-    'map' => 'required'
+    'num' => 'required|is_unique[drainChannels.num]',
+    'street' => 'required'
+  ];
+
+	public $validationUserRules = [
+    'first_name' => 'required',
+    'last_name' => 'required',
+    'cf' => 'required',
+    'category' => 'required'
+  ];
+
+	public $validationYearRules = [
+    'year' => 'required|is_unique',
+    'taxBusiness' => 'required',
+    'taxCitizen' => 'required'
   ];
 
 }

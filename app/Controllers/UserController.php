@@ -34,25 +34,36 @@ class UserController extends Controller {
   // SERVER IP/canalette-backend/user/create *************** ADD USER -------------------------------------- POSTMAN OK
   public function create() {
     $model = new UserModel();
-    //convert request body to associative array
-    $input = json_decode($this->request->getBody(), true);
-    //$data = gettype($input);
-    $saved = $model->save([
-      'first_name' => $input['first_name'],
-      'last_name' => $input['last_name'],
-      'cf' => $input['cf'],
-      'email'  => $input['email'],
-      'tel' => $input['tel'],
-      'category' => $input['category']
-    ]);
-    $response = [
-      'status'   => 201,
-      'error'    => null,
-      'messages' => ['success' => 'Data Saved']
-    ];
-    return $this->respondCreated($response);
+    $input = json_decode($this->request->getBody(), true); //convert to associative array
+    
+    $validation = \Config\Services::validation();
+    $val = $validation->run($input, 'validationUserRules');     
+    
+    if (!$val) {
+      $responseErr = [
+        'status'   => 400,
+        'error'    => "error",
+        'messages' => ['error' => "L'utente esiste già"]
+      ];
+      return $this->respondCreated($responseErr);  
+    } else {
+      //eventually change to insert
+      $saved = $model->save([
+        'first_name' => $input['first_name'],
+        'last_name' => $input['last_name'],
+        'cf' => $input['cf'],
+        'email'  => $input['email'],
+        'tel' => $input['tel'],
+        'category' => $input['category']
+      ]);
+      $response = [
+        'status'   => 201,
+        'error'    => null,
+        'messages' => ['success' => 'Data Saved']
+      ];
+      return $this->respondCreated($response);
+    } 
   }
-
   // SERVER IP/canalette-backend/user/delete/(:num) ******** DELETE USER ----------------------------------- POSTMAN OK
   public function delete($id = null) {
     $model = new UserModel();

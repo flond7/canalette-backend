@@ -32,20 +32,21 @@ class DrainController extends Controller {
 
   // SERVER IP/canalette-backend/drain/create *************** ADD DRAIN ---------- OK ON POSTMAN
   public function create() {
-    //helper(['form', 'url']);
+    helper('form', 'url');
     $model = new DrainModel();
     $input = json_decode($this->request->getBody(), true);  //convert to associative array
     
-    $validation = \Config\Services::validation();
-    $val = $validation->run($input, 'validationDrainRules');     
-    
+    $validation = \Config\Services::validation();  //loading the library
+    $val = $validation->run($input,'validationDrainRules');
+    print($val);
+  
     if (!$val) {
       $responseErr = [
         'status'   => 400,
         'error'    => "error",
         'messages' => ['error' => 'La canaletta esiste già']
       ];
-      return $this->respondCreated($responseErr);  
+      return $this->respondCreated($responseErr);
     } else {
       $saved = $model->insert([
         'num' => $input['num'],
@@ -59,7 +60,7 @@ class DrainController extends Controller {
         'messages' => ['success' => 'Data Saved']
       ];
       return $this->respondCreated($response);
-    } 
+    }
   }
 
   // SERVER IP/canalette-backend/drain/delete/(:num) ******* DELETE DRAIN -------- OK ON POSTMAN
