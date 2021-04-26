@@ -49,12 +49,12 @@ class Validation
 	public $validationUserRules = [
     'first_name' => 'required',
     'last_name' => 'required',
-    'cf' => 'required',
+    'cf' => 'required|is_unique[users.cf]',
     'category' => 'required'
   ];
 
 	public $validationYearRules = [
-    'year' => 'required|is_unique',
+    'year' => 'required|is_unique[taxes.year]',
     'taxBusiness' => 'required',
     'taxCitizen' => 'required'
   ];
