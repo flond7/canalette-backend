@@ -112,6 +112,8 @@
 ## validation
 - Validation rules have to be added as array in App/Config/Validation.php  
   public validationComponentRules = ['name' => 'required']  
+- for the is_unique rule you have to specify the table and column where it has to check  
+  'num' => 'required|is_unique[drainChannels.num]',  
 - In the controller add link to validation and run the right config  
   $validation = \Config\Services::validation();  
   $val = $validation->run($input, 'validationComponentRules');  
