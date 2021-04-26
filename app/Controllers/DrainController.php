@@ -38,8 +38,7 @@ class DrainController extends Controller {
     
     $validation = \Config\Services::validation();  //loading the library
     $val = $validation->run($input,'validationDrainRules');
-    print($val);
-  
+   
     if (!$val) {
       $responseErr = [
         'status'   => 400,
