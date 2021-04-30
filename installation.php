@@ -47,7 +47,7 @@ $tabTwo = "CREATE TABLE IF NOT EXISTS taxes (
   ivaFull INT(2) NOT NULL,
   ivaSplit INT(2) NOT NULL,
   ivaZero INT(2) NOT NULL,
-  mailing_money DOUBLE(40,2) NOT NULL,
+  mailing_money DOUBLE(40,2) NOT NULL
   )";
 if (mysqli_query($link, $tabTwo)) {
   echo "Table TAXES created successfully. ";
@@ -110,11 +110,11 @@ if (mysqli_query($link, $insertTwo)) {
 
 // Add test initial data 
 $insertThree = "INSERT INTO drainChannels (id_drain, num, street, fogl, map) VALUES
-  (1, '1', 'Via Roma 1', '12', '5'),
-  (2, '112', 'Via Milano 1', '67', '77'),
-  (3, '273', 'Via Udine 1', '2', '53'),
-  (4, '439', 'Via Genova 1', '5', '81'),
-  (5, '576', 'Via Bari 1', '27', '153')";
+  (1, '101', 'Via Roma 1', '12', '5'),
+  (2, '102', 'Via Milano 1', '67', '77'),
+  (3, '103', 'Via Udine 1', '2', '53'),
+  (4, '104', 'Via Genova 1', '5', '81'),
+  (5, '105', 'Via Bari 1', '27', '153')";
 if (mysqli_query($link, $insertThree)) {
   echo "Table inserted data successfully.";
 } else {
