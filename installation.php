@@ -42,7 +42,11 @@ if (mysqli_query($link, $tabOne)) {
 $tabTwo = "CREATE TABLE IF NOT EXISTS taxes (
   id_year INT(4) NOT NULL PRIMARY KEY,
   taxCitizen DOUBLE(40,2) NOT NULL,
-  taxBusiness DOUBLE(40,2) NOT NULL
+  taxBusiness DOUBLE(40,2) NOT NULL,
+  ivaFull INT(2) NOT NULL,
+  ivaSplit INT(2) NOT NULL,
+  ivaZero INT(2) NOT NULL,
+  mailing_money DOUBLE(40,2) NOT NULL,
   )";
 if (mysqli_query($link, $tabTwo)) {
   echo "Table TAXES created successfully. ";
@@ -93,10 +97,10 @@ if (mysqli_query($link, $insertOne)) {
 }  
 
 // Add test initial data 
-$insertTwo = "INSERT INTO taxes (id_year, taxCitizen, taxBusiness) VALUES
-  (1994, 100, 150),
-  (1995, 200, 300),
-  (2020, 500, 800)";
+$insertTwo = "INSERT INTO taxes (id_year, taxCitizen, taxBusiness, ivaFull, ivaSplit, IvaZero, mailing_money) VALUES
+  (1994, 100, 150, 10, 0, 0, 3.50),
+  (1995, 200, 300, 10, 0, 0, 3.50),
+  (2020, 500, 800, 10, 0, 0, 5.50)";
 if (mysqli_query($link, $insertTwo)) {
   echo "USER data inserted successfully. ";
 } else {

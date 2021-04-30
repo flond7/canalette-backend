@@ -8,7 +8,7 @@ class TaxModel extends Model
   protected $table = 'taxes';
   protected $primaryKey = 'id_year';
   protected $returnType = 'array';
-  protected $allowedFields = ['id_year', 'taxCitizen', 'taxBusiness'];
+  protected $allowedFields = ['id_year', 'taxCitizen', 'taxBusiness', 'ivaFull', 'ivaSplit', 'IvaZero', 'mailing_money'];
 
   /* NOTHING ELSE HERE */
 

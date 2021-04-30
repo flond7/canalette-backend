@@ -36,7 +36,11 @@ class TaxController extends Controller {
     $saved = $model->insert([
       'id_year' => $input['id_year'],
       'taxBusiness' => $input['taxBusiness'],
-      'taxCitizen' => $input['taxCitizen']
+      'taxCitizen' => $input['taxCitizen'],
+      'ivaFull' => $input['ivaFull'],
+      'ivaSplit' => $input['ivaSplit'],
+      'ivaZero' => $input['ivaZero'],
+      'mailing_money' => $input['mailing_money']
     ]);
     //$data = gettype($input['taxBusiness']);
     $response = [
