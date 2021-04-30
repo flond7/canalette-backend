@@ -8,7 +8,7 @@ class UserModel extends Model
   protected $table = 'users';
   protected $primaryKey = 'id_user';
   protected $returnType = 'array';
-  protected $allowedFields = ['id_user', 'first_name', 'last_name', 'cf', 'email', 'tel', 'category'];
+  protected $allowedFields = ['id_user', 'first_name', 'last_name', 'cf', 'email', 'tel', 'category', 'tax_type'];
 
   public function joined($filter) {
     $data = $this->db->table('relational')

@@ -3,6 +3,7 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use CodeIgniter\Controller;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\HTTP\Message;
 use CodeIgniter\HTTP\Response;
 
 /* FOR VALIDATION
@@ -38,14 +39,17 @@ class UserController extends Controller {
     
     $validation = \Config\Services::validation();
     $val = $validation->run($input, 'validationUserRules');     
-    
+  
+    /* {'first_name':"el", 'last_name':"ln",'cf':'cf', 'email':"",'tel':"",'category':"citizen"} */ 
     if (!$val) {
       $responseErr = [
         'status'   => 400,
         'error'    => "error",
         'messages' => ['error' => "L'utente esiste già"]
       ];
-      return $this->respondCreated($responseErr);  
+      
+      return $this->failValidationError($responseErr['error'], $responseErr['messages']);
+//      return $this->respondCreated($responseErr);  
     } else {
       //eventually change to insert
       $saved = $model->save([
@@ -54,7 +58,8 @@ class UserController extends Controller {
         'cf' => $input['cf'],
         'email'  => $input['email'],
         'tel' => $input['tel'],
-        'category' => $input['category']
+        'category' => $input['category'],
+        'tax_type' => $input['tax_type']
       ]);
       $response = [
         'status'   => 201,

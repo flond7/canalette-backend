@@ -50,13 +50,24 @@ class Validation
     'first_name' => 'required',
     'last_name' => 'required',
     'cf' => 'required|is_unique[users.cf]',
-    'category' => 'required'
+    'category' => 'required',
+    'tax_type' => 'required'
   ];
 
 	public $validationYearRules = [
     'year' => 'required|is_unique[taxes.year]',
     'taxBusiness' => 'required',
-    'taxCitizen' => 'required'
+    'taxCitizen' => 'required',
+    'ivaFull' => 'required',
+    'ivaSplit' => 'required',
+    'ivaZero' => 'required',
+    'mailing_money' => 'required'
   ];
+
+	public $validationRelationalRules = [
+		'year' => 'required',
+    '' => 'required',
+    'paid' => 'required'
+	];
 
 }

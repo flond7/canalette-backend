@@ -30,7 +30,8 @@ $tabOne = "CREATE TABLE IF NOT EXISTS users (
   cf VARCHAR(16),
   email VARCHAR(70),
   tel VARCHAR(30),
-  category VARCHAR(30)
+  category VARCHAR(30),
+  tax_type VARCHAR(30)
   )";
 if (mysqli_query($link, $tabOne)) {
   echo "Table USERS created successfully. ";
@@ -84,12 +85,12 @@ if (mysqli_query($link, $tabFour)) {
 }
 
 // Add test initial data 
-$insertOne = "INSERT INTO users (id_user, first_name, last_name, cf, email, tel, category) VALUES
-  (1, 'Elisa', 'Pessa', 'PSSLSE1234567890', 'elisa@mail.it', '0123456789', 'citizen'),
-  (2, 'Alessandra', 'Pessa', 'AL35G5t698S', 'elisa@mail.it', '0123456789', 'citizen'),
-  (3, 'Luca', 'Pessa', 'LCGF93FG871K', 'elisa@mail.it', '0123456789', 'citizen'),
-  (4, 'Francesca', 'Pessa', 'FCGTLT86F45Gt998', 'elisa@mail.it', '0123456789', 'business'),
-  (5, 'Pier', 'Pessa', 'PRG67F98KOL457U', 'elisa@mail.it', '0123456789', 'business')";
+$insertOne = "INSERT INTO users (id_user, first_name, last_name, cf, email, tel, category, tax_type) VALUES
+  (1, 'Elisa', 'Pessa', 'PSS', 'elisa@mail.it', '0123456789', 'citizen', 'ivaFull'),
+  (2, 'Alessandra', 'Pessa', 'ALE', 'ale@mail.it', '0123456789', 'citizen', 'ivaFull'),
+  (3, 'Luca', 'Pessa', 'LUC', 'luca@mail.it', '0123456789', 'citizen', 'ivaFull'),
+  (4, 'Francesca', 'Pessa', 'FRA', 'fra@mail.it', '0123456789', 'business', 'ivaSplit'),
+  (5, 'Pier', 'Pessa', 'PIE', 'pier@mail.it', '0123456789', 'business', 'ivaZero')";
 if (mysqli_query($link, $insertOne)) {
   echo "USER data inserted successfully. ";
 } else {
