@@ -65,9 +65,11 @@ class Validation
   ];
 
 	public $validationRelationalRules = [
-		'year' => 'required',
-    '' => 'required',
-    'paid' => 'required'
+		'id_year' => 'required',
+    'id_user' => 'required',
+    'id_drain' => 'required',
+    'amount_paid' => 'required',
+    'amount_computed' => 'required'
 	];
 
 }
