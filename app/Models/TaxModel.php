@@ -10,6 +10,17 @@ class TaxModel extends Model
   protected $returnType = 'array';
   protected $allowedFields = ['id_year', 'taxCitizen', 'taxBusiness', 'ivaFull', 'ivaSplit', 'IvaZero', 'mailing_money'];
 
+  public function joined($filter) {
+    $data = $this->db->table('relational')
+                     ->select('*')
+                     ->join('users', 'users.id_user = relational.id_user', 'right outer')
+                     //->join('taxes', 'taxes.id_year = relational.id_year', 'right outer')
+                     ->join('drainChannels', 'drainChannels.id_drain = relational.id_drain', 'right outer')
+                     ->where('id_year', $filter)
+                     ->get()->getResult();
+    return $data;
+  }
+
   /* NOTHING ELSE HERE */
 
   /*

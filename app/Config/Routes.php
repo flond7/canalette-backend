@@ -46,13 +46,13 @@ $routes->put('drain/edit/(:num)','DrainController::update/$1');
 $routes->delete('drain/delete/(:num)', 'DrainController::delete/$1');
 $routes->get('drain/joined/(:any)', 'DrainController::joined/$1');
 
-// DRAINCHANNELS
+// TAX - YEAR
 $routes->get('tax/list','TaxController::index');
 $routes->get('tax/view/(:any)','TaxController::showItem/$1');
 $routes->post('tax/create','TaxController::create');
 //$routes->put('tax/edit/(:num)','TaxController::update/$1');
 $routes->delete('tax/delete/(:num)', 'TaxController::delete/$1');
-//$routes->get('tax/joined/(:any)', 'TaxController::joined/$1');
+$routes->get('tax/joined/(:any)', 'TaxController::joined/$1');
 
 // USERS
 $routes->get('user/list','UserController::index');
@@ -63,6 +63,17 @@ $routes->delete('user/delete/(:num)', 'UserController::delete/$1');
 $routes->get('user/joined/(:any)', 'UserController::joined/$1');
 
 $routes->options('(:any)', 'UserController::options'); //one options method for all routes.
+
+
+// RELATIONAL
+$routes->get('relational/list','RelationalController::index');
+//$routes->get('relational/view/(:any)','RelationalController::showItem/$1');
+$routes->post('relational/create','RelationalController::create');
+//$routes->put('relational/edit/(:num)','RelationalController::update/$1');
+$routes->delete('relational/delete/(:num)', 'RelationalController::delete/$1');
+//$routes->get('relational/joined/(:any)', 'RelationalController::joined/$1');
+
+
 
 /*
  * --------------------------------------------------------------------
