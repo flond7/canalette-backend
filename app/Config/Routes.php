@@ -67,7 +67,7 @@ $routes->options('(:any)', 'UserController::options'); //one options method for 
 
 // RELATIONAL
 $routes->get('relational/list','RelationalController::index');
-//$routes->get('relational/view/(:any)','RelationalController::showItem/$1');
+$routes->get('relational/view/(:any)','RelationalController::showItem/$1');
 $routes->post('relational/create','RelationalController::create');
 //$routes->put('relational/edit/(:num)','RelationalController::update/$1');
 $routes->delete('relational/delete/(:num)', 'RelationalController::delete/$1');

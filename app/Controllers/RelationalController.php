@@ -21,30 +21,30 @@ class RelationalController extends Controller {
   }
 
   // SERVER IP/canalette-backend/relational/view/(:num) *********** 
-  /* public function showItem($cf = null){ 
+  public function showItem($id = null){ 
     $model = new RelationalModel();
-    $data = $model->getWhere(['cf' => $cf])->getResult();
+    $data = $model->getWhere(['id' => $id])->getResult();
     if ($data) {
       return $this->respond($data);
     } else {
-      return $this->failNotFound('No Data Found with id ' . $cf);
+      return $this->failNotFound('No Data Found with id ' . $id);
     }
-  } */
+  }
 
-  // SERVER IP/canalette-backend/relational/create *************** ADD U
+  // SERVER IP/canalette-backend/relational/create 
   public function create() {
-    helper('form', 'url');
+    //helper('form', 'url');
     $model = new RelationalModel();
-    $input = json_decode($this->request->getBody(), true);  //convert to associative array
+    $input = json_decode($this->request->getBody(), true); 
     
-    $validation = \Config\Services::validation();  //loading the library
+    $validation = \Config\Services::validation(); 
     $val = $validation->run($input,'validationRelationalRules');
    
     if (!$val) {
       $responseErr = [
         'status'   => 400,
         'error'    => "error",
-        'messages' => ['error' => 'La canaletta esiste già']
+        'messages' => ['error' => 'La relazione esiste già']
       ];
       return $this->respondCreated($responseErr);
     } else {
@@ -63,23 +63,6 @@ class RelationalController extends Controller {
       ];
       return $this->respondCreated($response);
     }
-    /* $model = new RelationalModel();
-    //convert request body to associative array
-    $input = json_decode($this->request->getBody(), true);
-    //$data = gettype($input);
-    $saved = $model->insert([
-      'amount' => $input['amount'],
-      'paid' => $input['paid'],
-      'id_user' => $input['id_user'],
-      'id_drain'  => $input['id_drain'],
-      'id_year' => $input['id_year']
-    ]);
-    $response = [
-      'status'   => 201,
-      'error'    => null,
-      'messages' => ['success' => 'Data Saved']
-    ];
-    return $this->respondCreated($saved); */
   }
 
   // SERVER IP/canalette-backend/relational/delete/(:num) ******** DELETE USER ----------------------------------- POSTMAN OK
@@ -128,7 +111,6 @@ class RelationalController extends Controller {
     }
   }
 
-  // update item
   // SERVER IP/canalette-backend/user/join
   public function joined($filter) {
     $model = new RelationalModel();
