@@ -77,7 +77,8 @@ $tabFour = "CREATE TABLE IF NOT EXISTS relational (
   paid TINYINT NOT NULL,
   id_user INT NOT NULL,
   id_drain INT NOT NULL,
-  id_year INT NOT NULL
+  id_year INT NOT NULL,
+  bill_number INT NOT NULL
   )";
 if (mysqli_query($link, $tabFour)) {
   echo "Table RELATIONAL created successfully. ";
@@ -124,16 +125,16 @@ if (mysqli_query($link, $insertThree)) {
  
 
  // Add test initial data 
-$insertThree = "INSERT INTO relational (id, amount_computed, amount_paid, paid, id_user, id_drain, id_year) VALUES
-(1, 100, 100, true, 1, 1, 1994),
-(2, 250, 250, true, 1, 1, 1995),
-(3, 250, 250, true, 2, 2, 1994),
-(4, 250, 250, true, 2, 3, 1994),
-(5, 100, 100, true, 2, 4, 1994),
-(6, 100, 60, true, 3, 2, 1995),
-(7, 100, 100, false, 4, 2, 2020),
-(8, 100, 80, true, 4, 4, 1994),
-(9, 300, 300, true, 5, 5, 1995)";
+$insertThree = "INSERT INTO relational (id, amount_computed, amount_paid, paid, id_user, id_drain, id_year, bill_number) VALUES
+(1, 100, 100, true, 1, 1, 1994, 1),
+(2, 250, 250, true, 1, 1, 1995, 2),
+(3, 250, 250, true, 2, 2, 1994, 3),
+(4, 250, 250, true, 2, 3, 1994, 4),
+(5, 100, 100, true, 2, 4, 1994, 4),
+(6, 100, 60, true, 3, 2, 1995, 5),
+(7, 100, 100, false, 4, 2, 2020, 6),
+(8, 100, 80, true, 4, 4, 1994, 7),
+(9, 300, 300, true, 5, 5, 1995, 8)";
 if (mysqli_query($link, $insertThree)) {
 echo "Table inserted data successfully.";
 } else {

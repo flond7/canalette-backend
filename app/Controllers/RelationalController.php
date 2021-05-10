@@ -40,21 +40,35 @@ class RelationalController extends Controller {
     $validation = \Config\Services::validation(); 
     $val = $validation->run($input,'validationRelationalRules');
    
-    if (!$val) {
+    /* check if record exist */
+    $check = $model->checkRecordExist($input['id_year'], $input['id_user'], $input['id_drain']);
+    //$check = $model->getWhere($input['id_year'], $input['id_user'], $input['id_drain'])->getResult();
+    //return $this->respondCreated($check);
+
+    if (!empty($check)) {
+      $responseErr = [
+        'status'   => 400,
+        'error'    => "REL-EXIST",
+        'messages' => ['error' => 'La relazione esiste già']
+      ];
+      return $this->fail($responseErr);
+    } else if (!$val) {
       $responseErr = [
         'status'   => 400,
         'error'    => "error",
-        'messages' => ['error' => 'La relazione esiste già']
+        'messages' => ['error' => 'Errore di validazione, qualche dato non è corretto']
       ];
       return $this->respondCreated($responseErr);
-    } else {
+    }
+    else {
       $saved = $model->insert([
         'paid' => $input['paid'],
         'amount_computed'  => $input['amount_computed'],
         'amount_paid'  => $input['amount_paid'],
         'id_user'  => $input['id_user'],
         'id_year'  => $input['id_year'],
-        'id_drain'  => $input['id_drain']
+        'id_drain'  => $input['id_drain'],
+        'bill_number' => $input['bill_number']
       ]);
       $response = [
         'status'   => 201,
