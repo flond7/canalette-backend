@@ -48,7 +48,6 @@ class Validation
 
 	public $validationUserRules = [
     'first_name' => 'required',
-    'last_name' => 'required',
     'cf' => 'required|is_unique[users.cf]',
     'category' => 'required',
     'tax_type' => 'required'
