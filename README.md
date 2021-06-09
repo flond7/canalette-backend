@@ -25,9 +25,9 @@
 
 - in /etc/apache2/apache2.conf add
   <Directory "/var/www/html/name-of-your-app">
-      Options Indexes FollowSymLinks
-      AllowOverride All
-      Require all granted
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
   </Directory>
 
 - create virtual host on apache2 creating a config file (copy the base config) in /etc/apache2/sites-available/NAME-OF-YOUR-APP.conf 
@@ -101,6 +101,9 @@
 - update()
   change function input and data structure
 
+- joined()
+  change the joined function in MODEL (change the WHERE clause according to parameter $filter)
+
 ## route
 - no required changes if you use the url
   http://localhost/NAME-OF-YOUR-APP/controllerName/controllerMethod/var
@@ -117,6 +120,11 @@
 - In the controller add link to validation and run the right config  
   $validation = \Config\Services::validation();  
   $val = $validation->run($input, 'validationComponentRules');  
+
+
+
+## ERROR CODES
+- REL-EXIST: the relation you're trying to add already exist  
 
 
 
